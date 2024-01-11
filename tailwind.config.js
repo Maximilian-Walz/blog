@@ -2,6 +2,34 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
+const myGreen = {
+  '50': '#E0FF62',
+  '100': '#DCFF4D',
+  '200': '#D4FF24',
+  '300': '#CAFB00',
+  '400': '#A9D200',
+  '500': '#88A900',
+  '600': '#5B7100',
+  '700': '#2E3900',
+  '800': '#010100',
+  '900': '#000000',
+  '950': '#000000'
+}
+
+const myGray = { 
+  "50": "#F1F2F3", 
+  "100": "#E0E2E5", 
+  "200": "#C2C5CC", 
+  "300": "#A6ABB5", 
+  "400": "#888E9B", 
+  "500": "#6B7280", 
+  "600": "#565C67", 
+  "700": "#41454E", 
+  "800": "#2A2D32", 
+  "900": "#151619", 
+  "950": "#0C0C0E"
+ }
+
 /** @type {import("tailwindcss/types").Config } */
 module.exports = {
   content: [
@@ -25,8 +53,8 @@ module.exports = {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.pink,
-        gray: colors.gray,
+        primary: myGreen,
+        gray: myGray,
       },
       typography: ({ theme }) => ({
         DEFAULT: {
