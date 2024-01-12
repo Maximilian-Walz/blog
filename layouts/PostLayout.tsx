@@ -54,28 +54,28 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>
-            <div className='flex justify-between items-end'>
+            <div className="flex items-end justify-between">
               <div className="pt-4 xl:pt-8">
-                  <Link
-                    href={`/${basePath}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label="Back to the blog"
-                  >
-                    &larr; Back to the blog
-                  </Link>
-                </div>
-                {tags && (
-                  <div className="pt-4 xr:pl-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 text-right">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} leftAlign={false}/>
-                      ))}
-                    </div>
+                <Link
+                  href={`/${basePath}`}
+                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  aria-label="Back to the blog"
+                >
+                  &larr; Back to the blog
+                </Link>
+              </div>
+              {tags && (
+                <div className="xr:pl-8 pt-4">
+                  <h2 className="text-right text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Tags
+                  </h2>
+                  <div className="flex flex-wrap">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} leftAlign={false} />
+                    ))}
                   </div>
-                )}
+                </div>
+              )}
             </div>
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
