@@ -16,8 +16,7 @@ const Logo = () => {
     return null
   }
 
-  return mounted && (theme === 'dark' || resolvedTheme === 'dark') ?
-    <LogoDark /> : <LogoLight />
+  return mounted && (theme === 'dark' || resolvedTheme === 'dark') ? <LogoDark /> : <LogoLight />
 }
 
 export default Logo
