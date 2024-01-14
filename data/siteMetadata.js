@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'My Blog',
+  title: 'Maximilian Walz',
   author: 'Maximilian Walz',
   headerTitle: 'Maximilian Walz\'s Blog',
   description: 'My personal blog.',
@@ -75,6 +75,7 @@ const siteMetadata = {
       lang: 'en',
     },
   },
+  */
   search: {
     provider: 'kbar', // kbar or algolia
     kbarConfig: {
@@ -89,7 +90,6 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
-  */
 }
 
 module.exports = siteMetadata
