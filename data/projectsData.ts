@@ -8,11 +8,28 @@ interface Project {
 const projectsData: Project[] = [
   {
     title: 'Appreciating the Analog - Creating a Custom Clock Face',
-    description: `
-      I like analog clocks. I know a lot of people who find them hard to read compared to their digital counterparts but to me they communicate time in a very distinct way. Growing up, a digital clock on every household appliance wasn't exactly the standard. So the analog clocks that were hanging in basically every room where the ones I learned to read first. And now, having gotten used to them over the years, I don't really have to parse the digits the clock hands are pointing to. I see the angle they're at and get a sense of time passed - just by giving it a quick glance.
-    `,
-    imgSrc: '/static/images/custom_clockface/disc_drawings.jpg',
+    description: 'I made a wooden clock face for an old clock clockwork, so I could finally have an analog clock in my room again.',
     href: '/blog/wooden_clockface',
+    imgSrc: '/static/images/custom_clockface/disc_drawings.jpg',
+  },
+  {
+    title: 'Knit Bracelet',
+    description: 'I knit a bracelet out of brass wire.',
+    href: '/blog/knit_bracelet',
+    imgSrc: '/static/images/knit_bracelet/finished.jpg'
+  },
+  {
+    title: 'Heart Pendant',
+    description: 'I created a heart pendant out of two stones I found in a local quarry lake.',
+    href: '/blog/heart_pendant',
+    imgSrc: '/static/images/heart_pendant.jpg'
+  },
+  {
+    title: 'Companion Cube Pendant',
+    description: 'I made a pendant resembling the Companion Cube from Portal.',
+    href: '/blog/companion_cube_pendant',
+    imgSrc: '/static/images/companion_cube.jpg'
+
   },
 ]
 
