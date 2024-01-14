@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Maximilian Walz',
   author: 'Maximilian Walz',
-  headerTitle: 'Maximilian Walz\'s Blog',
+  headerTitle: 'Maximilian Walz',
   description: 'My personal blog.',
   language: 'en-us',
   theme: 'system', // system, dark or light
