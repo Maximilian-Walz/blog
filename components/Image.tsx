@@ -1,5 +1,5 @@
-import NextImage, { ImageProps } from 'next/image'
+import ExportedImage, { ExportedImageProps } from 'next-image-export-optimizer'
 
-const Image = ({ ...rest }: ImageProps) => <NextImage {...rest} />
+const Image = ({ ...rest }: ExportedImageProps) => <ExportedImage {...rest} />
 
 export default Image
