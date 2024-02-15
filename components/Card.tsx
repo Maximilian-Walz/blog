@@ -6,7 +6,7 @@ import Tag from './Tag'
 
 type Props = {
   title: string
-  description: string
+  description?: string
   imgSrc?: string
   href?: string
   tags?: string[]
