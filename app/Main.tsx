@@ -1,7 +1,7 @@
 import Link from '@/components/Link'
 import CardLayout from '@/layouts/CardLayout'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 6
 
 export default function Home({ posts }) {
   return (
