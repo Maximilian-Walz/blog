@@ -7,21 +7,10 @@ import { allBlogs } from 'contentlayer/generated'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { slug } from 'github-slugger'
 
-const POSTS_PER_PAGE = 10
-
 export const metadata = genPageMetadata({ title: 'Projects' })
 
 export default function Projects() {
   const posts = allCoreContent(sortPosts(allBlogs))
-  const pageNumber = 1
-  const initialDisplayPosts = posts.slice(
-    POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
-  )
-  const pagination = {
-    currentPage: pageNumber,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-  }
 
   const tagCounts = tagData as Record<string, number>
   const tagKeys = Object.keys(tagCounts)
@@ -49,7 +38,7 @@ export default function Projects() {
           )
         })}
       </div>
-      <CardLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} />
+      <CardLayout posts={posts} />
     </div>
   )
 }

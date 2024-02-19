@@ -9,7 +9,7 @@ export default function Home({ posts }) {
       <h1 className="pt-5 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
         Latest
       </h1>
-      <CardLayout posts={posts} initialDisplayPosts={posts.slice(0, MAX_DISPLAY)} />
+      <CardLayout posts={posts.slice(0, MAX_DISPLAY)} />
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
