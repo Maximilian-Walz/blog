@@ -12,7 +12,6 @@ interface PaginationProps {
 }
 interface CardLayoutProps {
   posts: CoreContent<Blog>[]
-  title: string
   initialDisplayPosts?: CoreContent<Blog>[]
   pagination?: PaginationProps
 }
@@ -24,7 +23,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   const nextPage = currentPage + 1 <= totalPages
 
   return (
-    <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+    <div className="space-y-2 py-8 md:space-y-5">
       <nav className="flex justify-between">
         {!prevPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
@@ -59,7 +58,6 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 
 export default function CardLayout({
   posts,
-  title,
   initialDisplayPosts = [],
   pagination,
 }: CardLayoutProps) {
@@ -69,9 +67,6 @@ export default function CardLayout({
   return (
     <>
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          {title}
-        </h1>
         <div className="-m-4 flex flex-wrap">
           {!displayPosts.length && 'No posts found.'}
           {displayPosts.map((post) => {
