@@ -8,14 +8,22 @@ const CustomLink = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnch
   const isAnchorLink = href && href.startsWith('#')
 
   if (isInternalLink) {
-    return <Link href={href} {...rest} />
+    return <Link className="hover:text-primary-500" href={href} {...rest} />
   }
 
   if (isAnchorLink) {
-    return <a href={href} {...rest} />
+    return <a className="hover:underline" href={href} {...rest} />
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />
+  return (
+    <a
+      className="hover:text-primary-500"
+      target="_blank"
+      rel="noopener noreferrer"
+      href={href}
+      {...rest}
+    />
+  )
 }
 
 export default CustomLink
