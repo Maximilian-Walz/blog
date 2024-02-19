@@ -1,14 +1,16 @@
-import { ReactNode } from 'react'
-import Image from '@/components/Image'
-import Bleed from 'pliny/ui/Bleed'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
+import Image from '@/components/Image'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
-import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import SectionContainer from '@/components/SectionContainer'
+import Tag from '@/components/Tag'
+import siteMetadata from '@/data/siteMetadata'
+import type { Blog } from 'contentlayer/generated'
+import Bleed from 'pliny/ui/Bleed'
+import { CoreContent } from 'pliny/utils/contentlayer'
+import { formatDate } from 'pliny/utils/formatDate'
+import { ReactNode } from 'react'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -18,7 +20,7 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
-  const { slug, title, images } = content
+  const { slug, title, images, date, tags } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
 
@@ -27,17 +29,43 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
       <ScrollTopAndComment />
       <article>
         <div>
-          <div className="space-y-1 pb-10 text-center dark:border-gray-700">
+          <div className="space-y-1 pb-5 text-center dark:border-gray-700">
             <div className="w-full">
               <Bleed>
                 <div className="relative aspect-[2/1] w-full">
-                  <Image src={displayImage} alt={title} fill className="rounded-lg object-cover" />
+                  <Image
+                    src={displayImage}
+                    alt={title}
+                    fill
+                    className="rounded-lg object-cover p-2 blur-xl"
+                  />
+                  <Image
+                    src={displayImage}
+                    alt={title}
+                    fill
+                    className="absolute inset-0 rounded-xl object-cover"
+                  />
                 </div>
+                {tags && (
+                  <div className="flex flex-wrap pt-6">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
+                  </div>
+                )}
               </Bleed>
             </div>
             <div className="relative pt-10">
               <PageTitle>{title}</PageTitle>
             </div>
+            <dl>
+              <div>
+                <dt className="sr-only">Published on</dt>
+                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                </dd>
+              </div>
+            </dl>
           </div>
           <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
           {siteMetadata.comments && (
