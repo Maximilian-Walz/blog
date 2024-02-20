@@ -32,7 +32,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
       <ScrollTopAndComment />
       <article>
         <div>
-          <div className="space-y-1 pb-5 text-center dark:border-gray-700">
+          <div className="-mt-5 space-y-1 pb-5 text-center dark:border-gray-700">
             <div className="w-full">
               <Bleed>
                 <motion.div
@@ -53,17 +53,17 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                   />
                 </motion.div>
                 {tags && (
-                  <div className="flex flex-wrap pt-6">
+                  <motion.div className="flex flex-wrap pt-6" layoutId={`tags:${slug}`}>
                     {tags.map((tag) => (
                       <Tag key={tag} text={tag} />
                     ))}
-                  </div>
+                  </motion.div>
                 )}
               </Bleed>
             </div>
-            <div className="relative pt-10">
+            <motion.div className="relative pt-10" layoutId={`title:${slug}`}>
               <PageTitle>{title}</PageTitle>
-            </div>
+            </motion.div>
             <dl>
               <div>
                 <dt className="sr-only">Published on</dt>

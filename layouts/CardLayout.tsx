@@ -25,6 +25,7 @@ export default function CardLayout({ posts }: CardLayoutProps) {
             data-aos-easing="ease-in-sine"
             data-aos-anchor-placement="top-bottom"
             key={slug}
+            className="pb-8"
           >
             <Card
               id={slug}
