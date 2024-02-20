@@ -24,8 +24,8 @@ const image = (title, imgSrc) => (
 )
 
 const Card = ({ title, description, imgSrc, href, tags, date }: Props) => (
-  <div className="p-6 md:w-1/2">
-    <div className="overflow-hidden rounded-xl">
+  <div className="break-inside-avoid">
+    <div className="items-center overflow-hidden rounded-xl">
       {imgSrc &&
         (href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
