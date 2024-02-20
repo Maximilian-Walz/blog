@@ -19,15 +19,22 @@ export default function CardLayout({ posts }: CardLayoutProps) {
       {posts.map((post) => {
         const { slug, date, title, summary, tags, images } = post
         return (
-          <Card
+          <div
+            data-aos="fade-in"
+            data-aos-duration="400"
+            data-aos-easing="ease-in-sine"
+            data-aos-anchor-placement="top-bottom"
             key={slug}
-            title={title}
-            description={summary}
-            imgSrc={images?.[0]}
-            href={`/blog/${slug}`}
-            tags={tags}
-            date={date}
-          />
+          >
+            <Card
+              title={title}
+              description={summary}
+              imgSrc={images?.[0]}
+              href={`/blog/${slug}`}
+              tags={tags}
+              date={date}
+            />
+          </div>
         )
       })}
     </div>
