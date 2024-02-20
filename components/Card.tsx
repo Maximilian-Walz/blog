@@ -1,10 +1,10 @@
-import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
+import { motion } from 'framer-motion'
 import Image from './Image'
 import Link from './Link'
 import Tag from './Tag'
 
 type Props = {
+  id: string
   title: string
   description?: string
   imgSrc?: string
@@ -23,9 +23,9 @@ const image = (title, imgSrc) => (
   />
 )
 
-const Card = ({ title, description, imgSrc, href, tags, date }: Props) => (
+const Card = ({ title, description, imgSrc, href, tags, date, id }: Props) => (
   <div className="break-inside-avoid">
-    <div className="items-center overflow-hidden rounded-xl">
+    <motion.div className="items-center overflow-hidden rounded-xl" layoutId={`hero-image:${id}`}>
       {imgSrc &&
         (href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
@@ -34,7 +34,7 @@ const Card = ({ title, description, imgSrc, href, tags, date }: Props) => (
         ) : (
           image(title, imgSrc)
         ))}
-    </div>
+    </motion.div>
     <div className="p-4">
       <h2 className="text-2xl font-bold leading-8 tracking-tight">
         {href ? (

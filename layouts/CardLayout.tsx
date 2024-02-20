@@ -27,6 +27,7 @@ export default function CardLayout({ posts }: CardLayoutProps) {
             key={slug}
           >
             <Card
+              id={slug}
               title={title}
               description={summary}
               imgSrc={images?.[0]}

@@ -1,3 +1,5 @@
+'use client'
+
 import Comments from '@/components/Comments'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
@@ -11,6 +13,7 @@ import Bleed from 'pliny/ui/Bleed'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
 import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -32,7 +35,10 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
           <div className="space-y-1 pb-5 text-center dark:border-gray-700">
             <div className="w-full">
               <Bleed>
-                <div className="relative aspect-[2/1] w-full">
+                <motion.div
+                  className="relative aspect-[2/1] w-full"
+                  layoutId={`hero-image:${slug}`}
+                >
                   <Image
                     src={displayImage}
                     alt={title}
@@ -45,7 +51,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                     fill
                     className="absolute inset-0 rounded-xl object-cover"
                   />
-                </div>
+                </motion.div>
                 {tags && (
                   <div className="flex flex-wrap pt-6">
                     {tags.map((tag) => (
