@@ -24,13 +24,14 @@ const components = {
   reddit: Reddit,
 }
 
-type SocialIconProps = {
+export type SocialIconProps = {
   kind: keyof typeof components
   href: string | undefined
   size?: number
+  animDelay?: number
 }
 
-const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
+const SocialIcon = ({ kind, href, size = 8, animDelay = 0 }: SocialIconProps) => {
   if (!href || (kind === 'mail' && !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href)))
     return null
 
@@ -38,6 +39,9 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
 
   return (
     <a
+      data-aos="zoom-in"
+      data-aos-anchor-placement="center-bottom"
+      data-aos-delay={animDelay}
       className="text-sm text-gray-500 transition hover:text-gray-600"
       target="_blank"
       rel="noopener noreferrer"
