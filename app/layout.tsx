@@ -11,6 +11,8 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { AOSInit } from './aos'
+import { ScrollTop } from '@/components/ScrollTop'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -83,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
                 <main className="mb-auto">{children}</main>
+                <ScrollTop />
               </SearchProvider>
               <Footer />
             </div>
