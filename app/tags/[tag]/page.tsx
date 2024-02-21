@@ -1,11 +1,12 @@
-import { slug } from 'github-slugger'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import TagRecords from '@/components/TagRecords'
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayoutWithTags'
-import { allBlogs } from 'contentlayer/generated'
-import tagData from 'app/tag-data.json'
+import CardLayout from '@/layouts/CardLayout'
 import { genPageMetadata } from 'app/seo'
+import tagData from 'app/tag-data.json'
+import { allBlogs } from 'contentlayer/generated'
+import { slug } from 'github-slugger'
 import { Metadata } from 'next'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 
 export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
   const tag = decodeURI(params.tag)
@@ -25,7 +26,7 @@ export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>
   const tagKeys = Object.keys(tagCounts)
   const paths = tagKeys.map((tag) => ({
-    tag: encodeURI(tag),
+    tag: encodeURI(tag).toLowerCase(),
   }))
   return paths
 }
@@ -37,5 +38,13 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
-  return <ListLayout posts={filteredPosts} title={title} />
+  return (
+    <div>
+      <h1 className="pt-5 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+        {title}
+      </h1>
+      <TagRecords activeTag={tag} allCount={allBlogs.length} />
+      <CardLayout posts={filteredPosts} />
+    </div>
+  )
 }
