@@ -48,7 +48,7 @@ const Card = ({ title, description, imgSrc, href, tags, date, id }: Props) => (
       {<p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>}
       <motion.div className="my-2" layoutId={`tags:${id}`}>
         {tags && (
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-y-2">
             {tags.map((tag) => (
               <Tag key={tag} text={tag} />
             ))}

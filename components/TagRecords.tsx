@@ -14,7 +14,7 @@ export default function TagRecords({ activeTag, allCount }: TagRecordsProps) {
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
   return (
-    <div className="mb-8 mt-4 flex flex-wrap">
+    <div className="mb-8 mt-4 flex flex-wrap gap-y-2">
       {tagKeys.length === 0 && 'No tags found.'}
       <Tag text={allCount ? `All (${allCount})` : 'All'} active={!activeTag} href="/projects" />
       {sortedTags.map((t) => (
