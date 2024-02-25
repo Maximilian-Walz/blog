@@ -4,10 +4,6 @@ import Card from '@/components/Card'
 import type { Blog } from 'contentlayer/generated'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
-interface PaginationProps {
-  totalPages: number
-  currentPage: number
-}
 interface CardLayoutProps {
   posts: CoreContent<Blog>[]
 }
