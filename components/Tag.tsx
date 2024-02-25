@@ -9,6 +9,9 @@ interface Props {
 }
 
 const Tag = ({ text, leftAlign = true, active = true, href }: Props) => {
+  const tagFormat = (tag: string) =>
+    tag.replaceAll('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+
   return (
     <Link
       href={href || `/tags/${slug(text)}`}
@@ -22,7 +25,7 @@ const Tag = ({ text, leftAlign = true, active = true, href }: Props) => {
          me-2 rounded-full  px-2.5 py-0.5 text-xs font-medium  hover:text-primary-300  dark:hover:text-primary-400
       `}
     >
-      {text}
+      {tagFormat(text)}
     </Link>
   )
 }
