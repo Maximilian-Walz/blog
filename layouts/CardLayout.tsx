@@ -3,6 +3,7 @@
 import Card from '@/components/Card'
 import type { Blog } from 'contentlayer/generated'
 import { CoreContent } from 'pliny/utils/contentlayer'
+import { motion } from 'framer-motion'
 
 interface CardLayoutProps {
   posts: CoreContent<Blog>[]
@@ -15,11 +16,9 @@ export default function CardLayout({ posts }: CardLayoutProps) {
       {posts.map((post) => {
         const { slug, date, title, summary, tags, images } = post
         return (
-          <div
-            data-aos="fade-in"
-            data-aos-duration="400"
-            data-aos-easing="ease-in-sine"
-            data-aos-anchor-placement="top-bottom"
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
             key={slug}
             className="pb-8"
           >
@@ -32,7 +31,7 @@ export default function CardLayout({ posts }: CardLayoutProps) {
               tags={tags}
               date={date}
             />
-          </div>
+          </motion.div>
         )
       })}
     </div>

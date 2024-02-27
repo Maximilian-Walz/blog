@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Mail,
   Github,
@@ -10,6 +12,8 @@ import {
   Instagram,
   Reddit,
 } from './icons'
+
+import { motion } from 'framer-motion'
 
 const components = {
   mail: Mail,
@@ -38,10 +42,10 @@ const SocialIcon = ({ kind, href, size = 8, animDelay = 0 }: SocialIconProps) =>
   const SocialSvg = components[kind]
 
   return (
-    <a
-      data-aos="zoom-in"
-      data-aos-anchor-placement="center-bottom"
-      data-aos-delay={animDelay}
+    <motion.a
+      initial={{ opacity: 0, scale: 0.1 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ delay: animDelay, duration: 0.01, ease: 'anticipate' }}
       className="text-sm text-gray-500 transition hover:text-gray-600"
       target="_blank"
       rel="noopener noreferrer"
@@ -51,7 +55,7 @@ const SocialIcon = ({ kind, href, size = 8, animDelay = 0 }: SocialIconProps) =>
       <SocialSvg
         className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
       />
-    </a>
+    </motion.a>
   )
 }
 

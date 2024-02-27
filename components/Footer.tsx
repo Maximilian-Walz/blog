@@ -22,7 +22,7 @@ export default function Footer() {
       <div className="mt-16 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
           {socialIcons.map((props, i) => (
-            <SocialIcon key={i} {...props} size={6} animDelay={i * 100} />
+            <SocialIcon key={i} {...props} size={6} animDelay={i * 0.1} />
           ))}
         </div>
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">

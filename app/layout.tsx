@@ -9,7 +9,6 @@ import siteMetadata from '@/data/siteMetadata'
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { AOSInit } from './aos'
 import { ThemeProviders } from './theme-providers'
 
 const space_grotesk = Space_Grotesk({
@@ -75,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <meta name="darkreader-lock" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <AOSInit />
       <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
