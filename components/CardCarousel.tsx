@@ -23,19 +23,24 @@ export default function CardCarousel({ posts }: CardCarouselProps) {
     setColor(theme.theme === 'dark' ? '#0C0C0E' : '#ffffff')
   }, [theme])
 
-  const showLeftMask = useTransform(scrollXProgress, (value) => value * 10)
-  const showRightMask = useTransform(scrollXProgress, (value) => (1 - value) * 10)
+  const showLeftMask = useTransform(scrollXProgress, (value) => value * 100)
+  const showRightMask = useTransform(scrollXProgress, (value) => (1 - value) * 100)
 
   return (
-    <div className="relative -mx-2">
+    <div className="relative -mx-1">
       <div
         ref={carouselRef}
-        className=" flex flex-row flex-nowrap gap-5 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-800"
+        className=" flex flex-row flex-nowrap gap-5 overflow-x-auto scrollbar-none"
       >
         {posts.map((post) => {
           const { slug, date, title, summary, tags, images } = post
           return (
-            <div key={slug} className="w-full flex-none pb-5 sm:w-2/5">
+            <motion.div
+              key={slug}
+              className="w-full flex-none sm:w-2/5"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
+            >
               <CompactCard
                 id={slug}
                 title={title}
@@ -45,21 +50,21 @@ export default function CardCarousel({ posts }: CardCarouselProps) {
                 tags={tags}
                 date={date}
               />
-            </div>
+            </motion.div>
           )
         })}
       </div>
       <motion.div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: `linear-gradient(to left, transparent 90%, ${color})`,
+          background: `linear-gradient(to left, transparent 98%, ${color})`,
           opacity: showLeftMask,
         }}
       />
       <motion.div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: `linear-gradient(to right, transparent 90%, ${color})`,
+          background: `linear-gradient(to right, transparent 98%, ${color})`,
           opacity: showRightMask,
         }}
       />
