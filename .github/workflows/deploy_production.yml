@@ -1,6 +1,6 @@
-# This workflow will build and deploy the blog
+# This workflow will build and deploy the blog to the production folder
 
-name: Build & Deploy
+name: Deploy Production
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
         # Path to the local folder you want to copy.
         local: out
         # Path on the remote server to copy to.
-        remote: httpdocs
+        remote: httpdocs/production
         # Determines if files with  leading dot (.) on folder copy is included
         dotfiles: true
         # If it is a directory, remote files in it will be deleted before the copy is started.
