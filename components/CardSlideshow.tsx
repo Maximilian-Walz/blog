@@ -26,10 +26,12 @@ const arrow = (transform) => (
 )
 
 export default function CardSlideshow({ cards, key, changeInterval = null }: Props) {
+  const slidesAmount = Math.ceil(cards.length / CARDS_PER_SLIDE)
+  const slideSwitching = slidesAmount > 1
+
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
   const hoverRef = useRef(null)
   const hovering = useHover(hoverRef)
-
   const [lastChange, setLastChange] = useState<number>(Date.now())
 
   const setImage = (slideIndex: number, e?: React.MouseEvent<HTMLElement>) => {
@@ -40,11 +42,11 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
   }
 
   const prevCard = (e: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(currentSlideIndex - 1, cards.length / CARDS_PER_SLIDE), e)
+    setImage(mod(currentSlideIndex - 1, slidesAmount), e)
   }
 
   const nextCard = (e?: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(currentSlideIndex + 1, cards.length / CARDS_PER_SLIDE), e)
+    setImage(mod(currentSlideIndex + 1, slidesAmount), e)
   }
 
   useInterval(() => {
@@ -60,18 +62,23 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
           <button
             aria-label="Previous image"
             onClick={prevCard}
-            hidden={!hovering}
+            hidden={!hovering || !slideSwitching}
             className="z-10"
           >
             {arrow('matrix(-1, 0, 0, 1, 0, 0)')}
           </button>
-          <button aria-label="Next image" onClick={nextCard} hidden={!hovering} className="z-10">
+          <button
+            aria-label="Next image"
+            onClick={nextCard}
+            hidden={!hovering || !slideSwitching}
+            className="z-10"
+          >
             {arrow('')}
           </button>
         </div>
         <div className="absolute -bottom-8 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
-          {[...Array(cards.length / CARDS_PER_SLIDE)].map((_, i) => (
-            <button key={i} onClick={(e) => setImage(i, e)}>
+          {[...Array(slidesAmount)].map((_, i) => (
+            <button key={i} onClick={(e) => setImage(i, e)} hidden={!slideSwitching}>
               {i == currentSlideIndex && (
                 <motion.div
                   layoutId={`indicator-${key}`}

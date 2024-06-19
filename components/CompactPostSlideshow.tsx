@@ -13,6 +13,7 @@ export default function CompactPostSlideshow({ posts, key }: CompactPostSlidesho
   return (
     <CardSlideshow
       key={key}
+      changeInterval={10000}
       cards={posts.map((post) => {
         const { slug, date, title, summary, tags, images } = post
         return (
