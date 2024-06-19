@@ -1,4 +1,4 @@
-import CardCarousel from '@/components/CardCarousel'
+import CompactPostSlideshow from '@/components/CompactPostSlideshow'
 import Link from '@/components/Link'
 
 const MAX_DISPLAY = 6
@@ -6,10 +6,10 @@ const MAX_DISPLAY = 6
 export default function Home({ posts }) {
   return (
     <div>
-      <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-6xl md:leading-14">
+      <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
         Latest
       </h1>
-      <CardCarousel posts={posts.slice(0, MAX_DISPLAY)} />
+      <CompactPostSlideshow posts={posts.slice(0, MAX_DISPLAY)} key="latest-posts" />
       {posts.length > MAX_DISPLAY && (
         <div className="mt-3 flex justify-end text-base font-medium leading-6">
           <Link
@@ -21,10 +21,10 @@ export default function Home({ posts }) {
           </Link>
         </div>
       )}
-      <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-6xl md:leading-14">
+      <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
         My Favorites
       </h1>
-      <CardCarousel posts={posts.slice(0, MAX_DISPLAY).reverse()} />
+      <CompactPostSlideshow posts={posts.slice(0, MAX_DISPLAY).reverse()} key="favorite-posts" />
       {posts.length > MAX_DISPLAY && (
         <div className="mt-3 flex justify-end text-base font-medium leading-6">
           <Link

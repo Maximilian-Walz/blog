@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react'
-import Image from './Image'
 import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { useHover, useInterval } from 'usehooks-ts'
+import Image from './Image'
 
 interface Props {
   alt: string
@@ -75,7 +75,7 @@ export default function ImageSlideshow({
             {i == currentSlideIndex && (
               <motion.div
                 layout
-                layoutId="indicator"
+                layoutId={`indicator-${alt}`}
                 className="absolute h-3 w-3 rounded-full bg-primary-400 dark:bg-primary-500"
               />
             )}
