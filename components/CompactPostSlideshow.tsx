@@ -18,6 +18,7 @@ export default function CompactPostSlideshow({ posts, key }: CompactPostSlidesho
         const { slug, date, title, summary, tags, images } = post
         return (
           <CompactCard
+            key={slug}
             id={slug}
             title={title}
             description={summary}
