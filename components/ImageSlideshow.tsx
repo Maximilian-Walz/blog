@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import Image from './Image'
 import { motion } from 'framer-motion'
-import { useHover, useInterval, useReadLocalStorage } from 'usehooks-ts'
+import { useHover, useInterval } from 'usehooks-ts'
 
 interface Props {
   alt: string
@@ -18,7 +18,7 @@ const arrow = (transform) => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 330 330"
     fill="currentColor"
-    className="h-10 w-10 text-gray-300 hover:text-primary-400 active:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 dark:active:text-primary-400"
+    className="h-10 w-10 text-gray-300 hover:text-primary-400 active:text-primary-500 dark:text-gray-700 dark:hover:text-primary-500 dark:active:text-primary-400"
     transform={transform}
   >
     <path d="M233.252,155.997L120.752,6.001c-4.972-6.628-14.372-7.97-21-3c-6.628,4.971-7.971,14.373-3,21 l105.75,140.997L96.752,306.001c-4.971,6.627-3.627,16.03,3,21c2.698,2.024,5.856,3.001,8.988,3.001 c4.561,0,9.065-2.072,12.012-6.001l112.5-150.004C237.252,168.664,237.252,161.33,233.252,155.997z" />
@@ -71,20 +71,16 @@ export default function ImageSlideshow({
       </div>
       <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
         {[...Array(images.length)].map((_, i) => (
-          <motion.div
-            layout
-            key={i}
-            layoutId={`${i == currentSlideIndex && 'slideshow_indicator:' + alt}`}
-          >
-            <button
-              onClick={(e) => setImage(i, e)}
-              className={`h-3 w-3 rounded-full ${
-                i == currentSlideIndex
-                  ? 'bg-primary-400 dark:bg-primary-500'
-                  : 'bg-gray-300 hover:bg-primary-500 active:bg-primary-400 dark:bg-gray-300 dark:hover:bg-primary-400 dark:active:bg-primary-500'
-              }`}
-            />
-          </motion.div>
+          <button key={i} onClick={(e) => setImage(i, e)}>
+            {i == currentSlideIndex && (
+              <motion.div
+                layout
+                layoutId="indicator"
+                className="absolute h-3 w-3 rounded-full bg-primary-400 dark:bg-primary-500"
+              />
+            )}
+            <div className="h-3 w-3 rounded-full bg-gray-300 hover:bg-primary-500 active:bg-primary-400 dark:bg-gray-700 dark:hover:bg-primary-400 dark:active:bg-primary-500" />
+          </button>
         ))}
       </div>
       <div
