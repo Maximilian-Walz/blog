@@ -26,7 +26,7 @@ export default function CardLayout({ posts }: CardLayoutProps) {
               id={slug}
               title={title}
               description={summary}
-              imgSrc={images?.[0]}
+              images={images}
               href={`/blog/${slug}`}
               tags={tags}
               date={date}
