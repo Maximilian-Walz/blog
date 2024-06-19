@@ -54,7 +54,7 @@ export default function ImageSlideshow({
   }
 
   useInterval(() => {
-    if (changeInterval && Date.now() - lastChange > changeInterval) {
+    if (changeInterval && Date.now() - lastChange > changeInterval && !hovering) {
       nextImage()
     }
   }, changeInterval)

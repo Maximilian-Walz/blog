@@ -50,7 +50,7 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
   }
 
   useInterval(() => {
-    if (changeInterval && Date.now() - lastChange > changeInterval) {
+    if (changeInterval && Date.now() - lastChange > changeInterval && !hovering) {
       nextCard()
     }
   }, changeInterval)
