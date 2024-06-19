@@ -3,7 +3,5 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.formatOnSave": true,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }]
 }
