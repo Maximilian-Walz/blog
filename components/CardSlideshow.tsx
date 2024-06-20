@@ -95,7 +95,7 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
             style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
           >
             {cards.map((card, i) => (
-              <div key={i} className={`w-${CARD_WIDTH} flex-shrink-0 px-2`}>
+              <div key={i} className={`w-1/3 flex-shrink-0 px-2`}>
                 {card}
               </div>
             ))}
