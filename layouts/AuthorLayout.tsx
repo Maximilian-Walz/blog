@@ -1,6 +1,9 @@
+'use client'
+
 import Image from '@/components/Image'
 import SocialIcon from '@/components/social-icons'
 import type { Authors } from 'contentlayer/generated'
+import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -34,7 +37,13 @@ export default function AuthorLayout({ children, content }: Props) {
             <SocialIcon kind="linkedin" href={linkedin} />
           </div>
         </div>
-        <div className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">{children}</div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
+          className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2"
+        >
+          {children}
+        </motion.div>
       </div>
     </div>
   )

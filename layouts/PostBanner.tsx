@@ -29,7 +29,10 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
 
   return (
     <SectionContainer>
-      <article>
+      <motion.article
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
+      >
         <div>
           <div className="-mt-5 space-y-1 pb-5 text-center dark:border-gray-700">
             <div className="w-full">
@@ -72,7 +75,13 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
               </div>
             </dl>
           </div>
-          <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
+            className="prose max-w-none py-4 dark:prose-invert"
+          >
+            {children}
+          </motion.div>
           {siteMetadata.comments && (
             <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
               <Comments slug={slug} />
@@ -105,7 +114,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
             </div>
           </footer>
         </div>
-      </article>
+      </motion.article>
     </SectionContainer>
   )
 }

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import Image from './Image'
 import Link from './Link'
 import Tag from './Tag'
@@ -29,7 +28,7 @@ const image = (title, images: string[]) =>
 
 const Card = ({ title, description, images, href, tags, date, id }: Props) => (
   <div className="break-inside-avoid">
-    <motion.div className="items-center overflow-hidden rounded-xl" layoutId={`hero-image:${id}`}>
+    <div className="items-center overflow-hidden rounded-xl">
       {images &&
         (href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
@@ -38,9 +37,9 @@ const Card = ({ title, description, images, href, tags, date, id }: Props) => (
         ) : (
           image(title, images)
         ))}
-    </motion.div>
+    </div>
     <div className="p-4">
-      <motion.h2 className="text-2xl font-bold leading-8 tracking-tight" layoutId={`title:${id}`}>
+      <h2 className="text-2xl font-bold leading-8 tracking-tight">
         {href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
             {title}
@@ -48,9 +47,9 @@ const Card = ({ title, description, images, href, tags, date, id }: Props) => (
         ) : (
           title
         )}
-      </motion.h2>
+      </h2>
       {<p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>}
-      <motion.div className="my-2" layoutId={`tags:${id}`}>
+      <div className="my-2">
         {tags && (
           <div className="flex flex-wrap gap-y-2">
             {tags.map((tag) => (
@@ -58,7 +57,7 @@ const Card = ({ title, description, images, href, tags, date, id }: Props) => (
             ))}
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   </div>
 )

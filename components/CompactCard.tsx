@@ -24,7 +24,11 @@ const CompactCard = ({ title, description, imgSrc, href, tags, date, id }: Props
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
-        <motion.div className="items-center" layoutId={`hero-image:${id}`}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
+          className="items-center"
+        >
           {imgSrc && (
             <Image
               alt={title}
@@ -45,10 +49,7 @@ const CompactCard = ({ title, description, imgSrc, href, tags, date, id }: Props
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <motion.h2
-                className="text-2xl font-bold leading-8 tracking-tight text-white"
-                layoutId={`title:${id}`}
-              >
+              <h2 className="text-2xl font-bold leading-8 tracking-tight text-white">
                 {href ? (
                   <Link
                     href={href}
@@ -60,13 +61,13 @@ const CompactCard = ({ title, description, imgSrc, href, tags, date, id }: Props
                 ) : (
                   title
                 )}
-              </motion.h2>
+              </h2>
               {
                 <p className="prose mb-3 max-w-none text-gray-50 dark:text-gray-100">
                   {description}
                 </p>
               }
-              <motion.div className="my-2" layoutId={`tags:${id}`}>
+              <div className="my-2">
                 {tags && (
                   <div className="flex flex-wrap gap-y-2">
                     {tags.map((tag) => (
@@ -74,7 +75,7 @@ const CompactCard = ({ title, description, imgSrc, href, tags, date, id }: Props
                     ))}
                   </div>
                 )}
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
