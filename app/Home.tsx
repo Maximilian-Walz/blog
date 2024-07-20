@@ -1,6 +1,7 @@
 import CompactPostSlideshow from '@/components/CompactPostSlideshow'
 import Link from '@/components/Link'
 import { Blog } from 'contentlayer/generated'
+import Bleed from 'pliny/ui/Bleed'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
 const MAX_DISPLAY = 3
@@ -12,6 +13,17 @@ type Props = {
 export default function Home({ posts }: Props) {
   return (
     <div>
+      <div className="px-5 py-24">
+        <h1 className="text-center text-6xl font-extrabold">
+          Hi,{' '}
+          <Link href="/about" className="text-primary-500 hover:text-primary-400">
+            I'm Max!
+          </Link>
+        </h1>
+        <p className="text-center text-2xl leading-9 text-gray-800 dark:text-gray-200">
+          Welcome to my site, where I share the stuff I create in my free time.
+        </p>
+      </div>
       <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
         Latest
       </h1>
@@ -20,7 +32,7 @@ export default function Home({ posts }: Props) {
       <div className="mt-3 flex justify-end text-base font-medium leading-6">
         <Link
           href="/projects"
-          className="dark:hover:text-primary-40 text-primary-500 hover:text-primary-600"
+          className="text-primary-500 hover:text-primary-400"
           aria-label="All posts"
         >
           All Projects &rarr;
@@ -36,7 +48,7 @@ export default function Home({ posts }: Props) {
       <div className="mt-3 flex justify-end text-base font-medium leading-6">
         <Link
           href="/projects"
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          className="text-primary-500 hover:text-primary-400"
           aria-label="All posts"
         >
           All Projects &rarr;
