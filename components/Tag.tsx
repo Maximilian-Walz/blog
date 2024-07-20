@@ -19,10 +19,10 @@ const Tag = ({ text, leftAlign = true, active = true, href }: Props) => {
         ${leftAlign ? 'mr-3' : 'ml-3'}
         ${
           active
-            ? 'bg-primary-400 text-primary-700 dark:bg-primary-700 dark:text-primary-400'
-            : 'bg-primary-600 text-primary-400 dark:bg-primary-900 dark:text-primary-600'
+            ? 'bg-primary-400 text-primary-700 hover:text-primary-200 dark:bg-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
+            : 'bg-primary-600 text-primary-400 hover:text-primary-300 dark:bg-primary-900 dark:text-primary-600  dark:hover:text-primary-400'
         }
-         me-2 rounded-full  px-2.5 py-0.5 text-xs font-medium  hover:text-primary-300  dark:hover:text-primary-400
+         me-2 rounded-full  px-2.5 py-0.5 text-xs font-medium 
       `}
     >
       {formatTag(text)}
