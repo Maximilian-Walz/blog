@@ -48,6 +48,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                     className="rounded-lg object-cover p-2 blur-xl"
                   />
                   <Image
+                    priority
                     src={displayImage}
                     alt={title}
                     fill
