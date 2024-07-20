@@ -27,7 +27,7 @@ export default function Home({ posts }: Props) {
       <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
         Latest
       </h1>
-      <CompactPostSlideshow posts={posts.slice(0, MAX_DISPLAY)} key="latest-posts" />
+      <CompactPostSlideshow posts={posts.slice(0, MAX_DISPLAY)} id="latest-posts" />
 
       <div className="mt-3 flex justify-end text-base font-medium leading-6">
         <Link
@@ -43,7 +43,7 @@ export default function Home({ posts }: Props) {
       </h1>
       <CompactPostSlideshow
         posts={posts.filter((post) => post.favorite).reverse()}
-        key="favorite-posts"
+        id="favorite-posts"
       />
       <div className="mt-3 flex justify-end text-base font-medium leading-6">
         <Link

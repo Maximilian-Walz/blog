@@ -4,7 +4,7 @@ import { useHover, useInterval, useMediaQuery } from 'usehooks-ts'
 
 interface Props {
   cards: JSX.Element[]
-  key: string
+  id: string
   changeInterval?: number | null
 }
 
@@ -22,7 +22,7 @@ const arrow = (transform) => (
   </svg>
 )
 
-export default function CardSlideshow({ cards, key, changeInterval = null }: Props) {
+export default function CardSlideshow({ cards, id, changeInterval = null }: Props) {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 640px)')
   const isMediumDevice = useMediaQuery('only screen and (max-width : 1280px)')
   const CARDS_PER_SLIDE = isSmallDevice ? 1 : isMediumDevice ? 2 : 3
@@ -82,7 +82,7 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
             <button key={i} onClick={(e) => setImage(i, e)} hidden={!slideSwitching}>
               {i == currentSlideIndex && (
                 <motion.div
-                  layoutId={`indicator-${key}`}
+                  layoutId={`indicator-${id}`}
                   className="absolute h-3 w-3 rounded-full bg-primary-400 dark:bg-primary-500"
                 />
               )}

@@ -6,13 +6,13 @@ import CompactCard from './CompactCard'
 
 type CompactPostSlideshowProps = {
   posts: CoreContent<Blog>[]
-  key: string
+  id: string
 }
 
-export default function CompactPostSlideshow({ posts, key }: CompactPostSlideshowProps) {
+export default function CompactPostSlideshow({ posts, id }: CompactPostSlideshowProps) {
   return (
     <CardSlideshow
-      key={key}
+      id={id}
       changeInterval={10000}
       cards={posts.map((post) => {
         const { slug, date, title, summary, tags, images } = post
