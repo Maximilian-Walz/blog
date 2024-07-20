@@ -13,14 +13,14 @@ type Props = {
 export default function Home({ posts }: Props) {
   return (
     <div>
-      <div className="px-5 py-24">
-        <h1 className="text-center text-6xl font-extrabold">
+      <div className="px-2 py-16 sm:px-5 sm:py-24">
+        <h1 className="text-center text-4xl font-extrabold sm:text-6xl">
           Hi,{' '}
           <Link href="/about" className="text-primary-500 hover:text-primary-400">
             I'm Max!
           </Link>
         </h1>
-        <p className="text-center text-2xl leading-9 text-gray-800 dark:text-gray-200">
+        <p className="text-center text-lg leading-9 text-gray-800 dark:text-gray-200 sm:text-2xl">
           Welcome to my site, where I share the stuff I create in my free time.
         </p>
       </div>
