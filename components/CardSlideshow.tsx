@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { useHover, useInterval } from 'usehooks-ts'
-
-const CARDS_PER_SLIDE = 3
-const CARD_WIDTH = '1/3'
+import { useHover, useInterval, useMediaQuery } from 'usehooks-ts'
 
 interface Props {
   cards: JSX.Element[]
@@ -26,6 +23,10 @@ const arrow = (transform) => (
 )
 
 export default function CardSlideshow({ cards, key, changeInterval = null }: Props) {
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 640px)')
+  const isMediumDevice = useMediaQuery('only screen and (max-width : 1280px)')
+  const CARDS_PER_SLIDE = isSmallDevice ? 1 : isMediumDevice ? 2 : 3
+
   const slidesAmount = Math.ceil(cards.length / CARDS_PER_SLIDE)
   const slideSwitching = slidesAmount > 1
 
@@ -95,7 +96,7 @@ export default function CardSlideshow({ cards, key, changeInterval = null }: Pro
             style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
           >
             {cards.map((card, i) => (
-              <div key={i} className={`w-1/3 flex-shrink-0 px-2`}>
+              <div key={i} className={`w-full flex-shrink-0 px-2 sm:w-1/2 xl:w-1/3`}>
                 {card}
               </div>
             ))}
