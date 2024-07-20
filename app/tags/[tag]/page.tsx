@@ -1,3 +1,4 @@
+import { formatTag } from '@/components/Tag'
 import TagRecords from '@/components/TagRecords'
 import siteMetadata from '@/data/siteMetadata'
 import CardLayout from '@/layouts/CardLayout'
@@ -34,7 +35,7 @@ export const generateStaticParams = async () => {
 export default function TagPage({ params }: { params: { tag: string } }) {
   const tag = decodeURI(params.tag)
   // Capitalize first letter and convert space to dash
-  const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
+  const title = formatTag(tag)
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
