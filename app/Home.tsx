@@ -1,9 +1,15 @@
 import CompactPostSlideshow from '@/components/CompactPostSlideshow'
 import Link from '@/components/Link'
+import { Blog } from 'contentlayer/generated'
+import { CoreContent } from 'pliny/utils/contentlayer'
 
 const MAX_DISPLAY = 3
 
-export default function Home({ posts }) {
+type Props = {
+  posts: CoreContent<Blog>[]
+}
+
+export default function Home({ posts }: Props) {
   return (
     <div>
       <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
@@ -23,7 +29,10 @@ export default function Home({ posts }) {
       <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:py-5 md:text-5xl md:leading-14">
         My Favorites
       </h1>
-      <CompactPostSlideshow posts={posts.reverse()} key="favorite-posts" />
+      <CompactPostSlideshow
+        posts={posts.filter((post) => post.favorite).reverse()}
+        key="favorite-posts"
+      />
       <div className="mt-3 flex justify-end text-base font-medium leading-6">
         <Link
           href="/projects"
