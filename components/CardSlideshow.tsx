@@ -27,7 +27,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
   const isMediumDevice = useMediaQuery('only screen and (max-width : 1280px)')
   const CARDS_PER_SLIDE = isSmallDevice ? 1 : isMediumDevice ? 2 : 3
 
-  const slidesAmount = Math.ceil(cards.length / CARDS_PER_SLIDE)
+  const slidesAmount = Math.ceil(cards.length ?? 0 / CARDS_PER_SLIDE)
   const slideSwitching = slidesAmount > 1
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
