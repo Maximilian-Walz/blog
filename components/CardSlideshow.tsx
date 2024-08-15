@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHover, useInterval, useMediaQuery } from 'usehooks-ts'
 
 interface Props {
@@ -25,15 +25,17 @@ const arrow = (transform) => (
 export default function CardSlideshow({ cards, id, changeInterval = null }: Props) {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 640px)')
   const isMediumDevice = useMediaQuery('only screen and (max-width : 1280px)')
-  const CARDS_PER_SLIDE = isSmallDevice ? 1 : isMediumDevice ? 2 : 3
-
-  const slidesAmount = Math.ceil(cards.length ?? 0 / CARDS_PER_SLIDE)
-  const slideSwitching = slidesAmount > 1
+  const [slidesAmount, setSlidesAmount] = useState(0)
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
   const hoverRef = useRef(null)
   const hovering = useHover(hoverRef)
   const [lastChange, setLastChange] = useState<number>(Date.now())
+
+  useEffect(() => {
+    setSlidesAmount(Math.ceil(cards.length / (isSmallDevice ? 1 : isMediumDevice ? 2 : 3)))
+    setCurrentSlideIndex(0)
+  }, [isSmallDevice, isMediumDevice, cards.length])
 
   const setImage = (slideIndex: number, e?: React.MouseEvent<HTMLElement>) => {
     e?.stopPropagation()
@@ -63,7 +65,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
           <button
             aria-label="Previous image"
             onClick={prevCard}
-            hidden={!hovering || !slideSwitching}
+            hidden={!hovering || slidesAmount <= 1}
             className="z-10"
           >
             {arrow('matrix(-1, 0, 0, 1, 0, 0)')}
@@ -71,7 +73,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
           <button
             aria-label="Next image"
             onClick={nextCard}
-            hidden={!hovering || !slideSwitching}
+            hidden={!hovering || slidesAmount <= 1}
             className="z-10"
           >
             {arrow('')}
@@ -79,7 +81,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
         </div>
         <div className="absolute -bottom-8 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(slidesAmount)].map((_, i) => (
-            <button key={i} onClick={(e) => setImage(i, e)} hidden={!slideSwitching}>
+            <button key={i} onClick={(e) => setImage(i, e)} hidden={slidesAmount <= 1}>
               {i == currentSlideIndex && (
                 <motion.div
                   layoutId={`indicator-${id}`}
