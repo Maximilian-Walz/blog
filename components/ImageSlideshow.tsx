@@ -91,6 +91,7 @@ export default function ImageSlideshow({
       >
         {images.map((image, i) => (
           <Image
+            priority
             key={i}
             alt={alt}
             src={image}

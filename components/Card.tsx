@@ -21,6 +21,7 @@ const image = (title, images: string[]) =>
       className="h-auto w-auto object-cover object-center transition-all duration-500 hover:scale-110"
       width={544}
       height={306}
+      priority
     />
   ) : (
     <ImageSlideshow alt={title} images={images} width={544} height={306} changeInterval={10000} />
