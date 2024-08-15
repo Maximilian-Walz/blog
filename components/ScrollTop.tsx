@@ -1,6 +1,5 @@
 'use client'
 
-import siteMetadata from '@/data/siteMetadata'
 import { useEffect, useState } from 'react'
 
 export function ScrollTop() {
@@ -27,7 +26,7 @@ export function ScrollTop() {
       <button
         aria-label="Scroll To Top"
         onClick={handleScrollTop}
-        className="rounded-full bg-primary-400 p-2 text-primary-700 transition-all hover:text-primary-300 dark:bg-primary-700 dark:text-primary-400  dark:hover:text-primary-400"
+        className="rounded-full bg-primary-700 text-primary-400 transition-all  hover:text-primary-400"
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path

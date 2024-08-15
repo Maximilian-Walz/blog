@@ -4,16 +4,15 @@ import Comments from '@/components/Comments'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SectionContainer from '@/components/SectionContainer'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import type { Blog } from 'contentlayer/generated'
+import { motion } from 'framer-motion'
 import Bleed from 'pliny/ui/Bleed'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
 import { ReactNode } from 'react'
-import { motion } from 'framer-motion'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -34,7 +33,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
         whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
       >
         <div>
-          <div className="-mt-5 space-y-1 pb-5 text-center dark:border-gray-700">
+          <div className="-mt-5 space-y-1 border-gray-700 pb-5 text-center">
             <div className="w-full">
               <Bleed>
                 <motion.div
@@ -70,7 +69,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
             <dl>
               <div>
                 <dt className="sr-only">Published on</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                <dd className="text-base font-medium leading-6 text-gray-400">
                   <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                 </dd>
               </div>
@@ -79,12 +78,12 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
-            className="prose max-w-none py-4 dark:prose-invert"
+            className="prose prose-invert max-w-none py-4"
           >
             {children}
           </motion.div>
           {siteMetadata.comments && (
-            <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+            <div className="pb-6 pt-6 text-center text-gray-300" id="comment">
               <Comments slug={slug} />
             </div>
           )}
@@ -94,7 +93,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${prev.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-400"
                     aria-label={`Previous post: ${prev.title}`}
                   >
                     &larr; {prev.title}
@@ -105,7 +104,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${next.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-400"
                     aria-label={`Next post: ${next.title}`}
                   >
                     {next.title} &rarr;

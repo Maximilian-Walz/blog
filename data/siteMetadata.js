@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'Maximilian Walz',
   description: 'My personal blog.',
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // dark
   siteUrl: 'https://maximilian-walz.com',
   siteRepo: 'https://github.com/Maximilian-Walz/blog',
   siteLogo: '/static/images/logo.png',

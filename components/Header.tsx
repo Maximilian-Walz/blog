@@ -1,12 +1,11 @@
 'use client'
 import headerNavLinks from '@/data/headerNavLinks'
 import siteMetadata from '@/data/siteMetadata'
+import { motion } from 'framer-motion'
 import Link from './Link'
-import Logo from './Logo'
+import { Logo } from './Logo'
 import MobileNav from './MobileNav'
 import SearchButton from './SearchButton'
-import ThemeSwitch from './ThemeSwitch'
-import { motion } from 'framer-motion'
 
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -21,13 +20,13 @@ function NavLink({ href, title }) {
     <motion.div onHoverStart={() => setHovering(true)} onHoverEnd={() => setHovering(false)}>
       <Link
         href={href}
-        className="relative hidden font-medium text-gray-900 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500 sm:block"
+        className="relative hidden font-medium text-gray-100 hover:text-primary-500 sm:block"
       >
         {title}
         {active && (
           <motion.div
             className={`absolute inset-0 bottom-0 text-transparent underline ${
-              hovering ? 'decoration-primary-500' : 'decoration-gray-900 dark:decoration-gray-100'
+              hovering ? 'decoration-primary-500' : 'decoration-gray-100'
             }`}
             layoutId="underline"
           >
@@ -65,7 +64,6 @@ const Header = () => {
             <NavLink key={link.href} {...link} />
           ))}
         <SearchButton />
-        <ThemeSwitch />
         <MobileNav />
       </div>
     </header>

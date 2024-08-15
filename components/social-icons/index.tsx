@@ -1,16 +1,16 @@
 'use client'
 
 import {
-  Mail,
-  Github,
   Facebook,
-  Youtube,
-  Linkedin,
-  Twitter,
-  Mastodon,
-  Threads,
+  Github,
   Instagram,
+  Linkedin,
+  Mail,
+  Mastodon,
   Reddit,
+  Threads,
+  Twitter,
+  Youtube,
 } from './icons'
 
 import { motion } from 'framer-motion'
@@ -53,7 +53,7 @@ const SocialIcon = ({ kind, href, size = 8, animDelay = 0 }: SocialIconProps) =>
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+        className={`fill-current text-gray-200 hover:text-primary-400 h-${size} w-${size}`}
       />
     </motion.a>
   )

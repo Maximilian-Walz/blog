@@ -1,7 +1,7 @@
 import Image from './Image'
+import ImageSlideshow from './ImageSlideshow'
 import Link from './Link'
 import Tag from './Tag'
-import ImageSlideshow from './ImageSlideshow'
 
 type Props = {
   id: string
@@ -48,7 +48,7 @@ const Card = ({ title, description, images, href, tags, date, id }: Props) => (
           title
         )}
       </h2>
-      {<p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>}
+      {<p className="prose mb-3 max-w-none text-gray-400">{description}</p>}
       <div className="my-2">
         {tags && (
           <div className="flex flex-wrap gap-y-2">
