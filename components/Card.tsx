@@ -18,7 +18,7 @@ const image = (title, images: string[]) =>
     <Image
       alt={title}
       src={images[0]}
-      className="object-cover object-center transition-all duration-500 hover:scale-110"
+      className="h-auto w-auto object-cover object-center transition-all duration-500 hover:scale-110"
       width={544}
       height={306}
     />

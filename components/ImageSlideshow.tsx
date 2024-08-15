@@ -94,7 +94,7 @@ export default function ImageSlideshow({
             key={i}
             alt={alt}
             src={image}
-            className="object-cover object-center transition-all duration-500 hover:scale-110"
+            className="h-auto w-auto object-cover object-center transition-all duration-500 hover:scale-110"
             width={width}
             height={height}
           />
