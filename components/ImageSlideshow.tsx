@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { SwipeEventData, useSwipeable } from 'react-swipeable'
 import { useHover, useInterval } from 'usehooks-ts'
 import Image from './Image'
 
@@ -35,19 +36,43 @@ export default function ImageSlideshow({
   changeInterval = null,
 }: Props) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
+  const [currentViewFactor, setCurrentViewFactor] = useState<number>(0)
   const hoverRef = useRef(null)
   const hovering = useHover(hoverRef)
 
   const [lastChange, setLastChange] = useState<number>(Date.now())
 
+  const handlers = useSwipeable({
+    onSwiping: (eventData) => handleSwiping(eventData),
+    onSwiped: (eventData) => handleSwiped(eventData),
+  })
+
   const setImage = (slideIndex: number, e?: React.MouseEvent<HTMLElement>) => {
     e?.stopPropagation()
     e?.preventDefault()
     setLastChange(Date.now())
+    setCurrentViewFactor(slideIndex)
     setCurrentSlideIndex(slideIndex)
   }
 
-  const prevImage = (e: React.MouseEvent<HTMLElement>) => {
+  const handleSwiping = (eventData: SwipeEventData) => {
+    const width = (eventData.event.currentTarget as HTMLElement).clientWidth
+    const percentage = eventData.deltaX / width
+    setCurrentViewFactor(currentSlideIndex - percentage)
+    console.log(percentage)
+  }
+
+  const handleSwiped = (eventData: SwipeEventData) => {
+    const width = (eventData.event.target as HTMLElement).clientWidth
+    const percentage = eventData.deltaX / width
+    if (percentage > 0.5) {
+      setImage(mod(currentSlideIndex - Math.ceil(percentage), images.length))
+    } else {
+      setCurrentViewFactor(currentSlideIndex)
+    }
+  }
+
+  const prevImage = (e?: React.MouseEvent<HTMLElement>) => {
     setImage(mod(currentSlideIndex - 1, images.length), e)
   }
 
@@ -62,44 +87,51 @@ export default function ImageSlideshow({
   }, changeInterval)
 
   return (
-    <div ref={hoverRef} className="relative overflow-hidden">
-      <div className="absolute inset-0 flex justify-between self-center">
-        <button aria-label="Previous image" onClick={prevImage} hidden={!hovering} className="z-10">
-          {arrow('matrix(-1, 0, 0, 1, 0, 0)')}
-        </button>
-        <button aria-label="Next image" onClick={nextImage} hidden={!hovering} className="z-10">
-          {arrow('')}
-        </button>
-      </div>
-      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
-        {[...Array(images.length)].map((_, i) => (
-          <button key={i} onClick={(e) => setImage(i, e)}>
-            {i == currentSlideIndex && (
-              <motion.div
-                layout
-                layoutId={`indicator-${alt}`}
-                className="absolute h-3 w-3 rounded-full bg-primary-500"
-              />
-            )}
-            <div className="h-3 w-3 rounded-full  bg-gray-700 hover:bg-primary-400 active:bg-primary-500" />
+    <div {...handlers}>
+      <div ref={hoverRef} className="relative overflow-hidden">
+        <div className="absolute inset-0 flex justify-between self-center">
+          <button
+            aria-label="Previous image"
+            onClick={prevImage}
+            hidden={!hovering}
+            className="z-10"
+          >
+            {arrow('matrix(-1, 0, 0, 1, 0, 0)')}
           </button>
-        ))}
-      </div>
-      <div
-        className="flex transition duration-700 ease-in-out"
-        style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
-      >
-        {images.map((image, i) => (
-          <Image
-            priority
-            key={i}
-            alt={alt}
-            src={image}
-            className="h-auto w-auto object-cover object-center transition-all duration-500 hover:scale-110"
-            width={width}
-            height={height}
-          />
-        ))}
+          <button aria-label="Next image" onClick={nextImage} hidden={!hovering} className="z-10">
+            {arrow('')}
+          </button>
+        </div>
+        <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
+          {[...Array(images.length)].map((_, i) => (
+            <button key={i} onClick={(e) => setImage(i, e)}>
+              {i == currentSlideIndex && (
+                <motion.div
+                  layout
+                  layoutId={`indicator-${alt}`}
+                  className="absolute h-3 w-3 rounded-full bg-primary-500"
+                />
+              )}
+              <div className="h-3 w-3 rounded-full  bg-gray-700 hover:bg-primary-400 active:bg-primary-500" />
+            </button>
+          ))}
+        </div>
+        <div
+          className="flex transition duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentViewFactor * 100}%)` }}
+        >
+          {images.map((image, i) => (
+            <Image
+              priority
+              key={i}
+              alt={alt}
+              src={image}
+              className="h-auto w-auto object-cover object-center transition-all duration-500 hover:scale-110"
+              width={width}
+              height={height}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
