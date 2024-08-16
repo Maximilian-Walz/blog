@@ -103,7 +103,7 @@ export default function ImageSlideshow({
             {arrow('')}
           </button>
         </div>
-        <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
+        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(images.length)].map((_, i) => (
             <button key={i} onClick={(e) => setImage(i, e)}>
               {i == currentSlideIndex && (

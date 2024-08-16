@@ -17,7 +17,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
 
   return (
     <KBarPortal>
-      <KBarPositioner className=" bg-black/50 p-4 backdrop-blur backdrop-filter">
+      <KBarPositioner className="z-30 bg-black/50 p-4 backdrop-blur backdrop-filter">
         <KBarAnimator className="w-full max-w-xl">
           <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
             <div className="flex items-center space-x-4 p-4">

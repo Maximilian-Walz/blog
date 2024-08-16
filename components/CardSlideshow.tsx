@@ -90,7 +90,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
             {arrow('')}
           </button>
         </div>
-        <div className="absolute -bottom-8 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
+        <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(slidesAmount)].map((_, i) => (
             <button key={i} onClick={(e) => setImage(i, e)} hidden={slidesAmount <= 1}>
               {i == Math.ceil(currentSlideIndex) && (
