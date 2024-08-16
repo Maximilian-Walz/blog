@@ -41,15 +41,26 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
     e?.stopPropagation()
     e?.preventDefault()
     setLastChange(Date.now())
+
+    // On last slide, never show empty spots
+    if (slideIndex == slidesAmount - 1) {
+      const cardsPerSlide = Math.ceil(cards.length / slidesAmount)
+      const cardsOnLastSlide = cards.length % cardsPerSlide
+      if (cardsOnLastSlide > 0) {
+        const emptyCards = cardsPerSlide - cardsOnLastSlide
+        slideIndex = slideIndex - emptyCards / cardsPerSlide
+      }
+    }
+
     setCurrentSlideIndex(slideIndex)
   }
 
   const prevCard = (e: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(currentSlideIndex - 1, slidesAmount), e)
+    setImage(mod(Math.ceil(currentSlideIndex - 1), slidesAmount), e)
   }
 
   const nextCard = (e?: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(currentSlideIndex + 1, slidesAmount), e)
+    setImage(mod(Math.ceil(currentSlideIndex + 1), slidesAmount), e)
   }
 
   useInterval(() => {
@@ -82,7 +93,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
         <div className="absolute -bottom-8 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(slidesAmount)].map((_, i) => (
             <button key={i} onClick={(e) => setImage(i, e)} hidden={slidesAmount <= 1}>
-              {i == currentSlideIndex && (
+              {i == Math.ceil(currentSlideIndex) && (
                 <motion.div
                   layoutId={`indicator-${id}`}
                   className="absolute h-3 w-3 rounded-full bg-primary-500"
