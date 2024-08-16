@@ -58,15 +58,16 @@ export default function ImageSlideshow({
   const handleSwiping = (eventData: SwipeEventData) => {
     const width = (eventData.event.currentTarget as HTMLElement).clientWidth
     const percentage = eventData.deltaX / width
-    setCurrentViewFactor(currentSlideIndex - percentage)
-    console.log(percentage)
+    setLastChange(Date.now())
+    setCurrentViewFactor(Math.min(currentSlideIndex - percentage, images.length - 1))
   }
 
   const handleSwiped = (eventData: SwipeEventData) => {
     const width = (eventData.event.target as HTMLElement).clientWidth
     const percentage = eventData.deltaX / width
-    if (percentage > 0.5) {
-      setImage(mod(currentSlideIndex - Math.ceil(percentage), images.length))
+    if (Math.abs(percentage) > 0.5) {
+      const currentImageIndex = currentSlideIndex - Math.round(percentage)
+      setImage(Math.max(Math.min(currentImageIndex, images.length - 1), 0))
     } else {
       setCurrentViewFactor(currentSlideIndex)
     }
@@ -87,7 +88,7 @@ export default function ImageSlideshow({
   }, changeInterval)
 
   return (
-    <div {...handlers}>
+    <div {...handlers} className="touch-none">
       <div ref={hoverRef} className="relative overflow-hidden">
         <div className="absolute inset-0 flex justify-between self-center">
           <button
@@ -117,8 +118,11 @@ export default function ImageSlideshow({
           ))}
         </div>
         <div
-          className="flex transition duration-700 ease-in-out"
-          style={{ transform: `translateX(-${currentViewFactor * 100}%)` }}
+          className="flex transition ease-in-out"
+          style={{
+            transform: `translateX(-${currentViewFactor * 100}%)`,
+            transitionDuration: currentViewFactor == currentSlideIndex ? '700ms' : '0s',
+          }}
         >
           {images.map((image, i) => (
             <Image
