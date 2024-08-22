@@ -1,5 +1,6 @@
 import SocialIcon, { SocialIconProps } from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
+import Link from './Link'
 
 export default function Footer() {
   const socialIcons: SocialIconProps[] = [
@@ -27,6 +28,8 @@ export default function Footer() {
         <div className="mb-2 flex space-x-2 text-sm text-gray-400">
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{siteMetadata.author}</div>
+          <div>{'·'}</div>
+          <Link href={'/legal'}>Legal</Link>
         </div>
       </div>
     </footer>
