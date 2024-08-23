@@ -1,3 +1,4 @@
+import PageViewTracker from '@/components/PageViewTracker'
 import TagRecords from '@/components/TagRecords'
 import CardLayout from '@/layouts/CardLayout'
 import { genPageMetadata } from 'app/seo'
@@ -11,6 +12,7 @@ export default function Projects() {
 
   return (
     <div>
+      <PageViewTracker title="Projects" />
       <h1 className="pt-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:pt-5 md:text-6xl md:leading-14">
         All Projects
       </h1>

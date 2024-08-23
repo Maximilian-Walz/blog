@@ -1,14 +1,9 @@
 import 'css/tailwind.css'
 
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import { ScrollTop } from '@/components/ScrollTop'
-import SectionContainer from '@/components/SectionContainer'
-import { KBarSearchProvider } from '@/components/search/KBar'
 import siteMetadata from '@/data/siteMetadata'
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+import App from './App'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -72,17 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="darkreader-lock" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className=" bg-gray-950 text-white antialiased">
-        <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-        <SectionContainer>
-          <div className="flex h-screen flex-col justify-between font-sans">
-            <KBarSearchProvider kbarConfig={{ searchDocumentsPath: 'search.json' }}>
-              <Header />
-              <main className="mb-auto">{children}</main>
-              <ScrollTop />
-            </KBarSearchProvider>
-            <Footer />
-          </div>
-        </SectionContainer>
+        <App>{children}</App>
       </body>
     </html>
   )

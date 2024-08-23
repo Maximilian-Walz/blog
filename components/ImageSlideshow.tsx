@@ -1,5 +1,6 @@
 'use client'
 
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { SwipeEventData, useSwipeable } from 'react-swipeable'
@@ -35,6 +36,7 @@ export default function ImageSlideshow({
   height,
   changeInterval = null,
 }: Props) {
+  const { trackEvent } = useMatomo()
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
   const [currentViewFactor, setCurrentViewFactor] = useState<number>(0)
   const hoverRef = useRef(null)
@@ -75,15 +77,22 @@ export default function ImageSlideshow({
 
   const prevImage = (e?: React.MouseEvent<HTMLElement>) => {
     setImage(mod(currentSlideIndex - 1, images.length), e)
+    trackEvent({ category: 'Image slideshow', action: 'prev image click' })
   }
 
-  const nextImage = (e?: React.MouseEvent<HTMLElement>) => {
+  const nextImage = (e?: React.MouseEvent<HTMLElement>, track?: boolean) => {
     setImage(mod(currentSlideIndex + 1, images.length), e)
+    if (track) trackEvent({ category: 'Image slideshow', action: 'prev image click' })
+  }
+
+  const specificImage = (i: number, e?: React.MouseEvent<HTMLElement>) => {
+    setImage(i, e)
+    trackEvent({ category: 'Image slideshow', action: 'indicator click' })
   }
 
   useInterval(() => {
     if (changeInterval && Date.now() - lastChange > changeInterval && !hovering) {
-      nextImage()
+      nextImage(undefined, false)
     }
   }, changeInterval)
 
@@ -93,19 +102,24 @@ export default function ImageSlideshow({
         <div className="absolute inset-0 flex justify-between self-center">
           <button
             aria-label="Previous image"
-            onClick={prevImage}
+            onClick={(e) => prevImage(e)}
             hidden={!hovering}
             className="z-10"
           >
             {arrow('matrix(-1, 0, 0, 1, 0, 0)')}
           </button>
-          <button aria-label="Next image" onClick={nextImage} hidden={!hovering} className="z-10">
+          <button
+            aria-label="Next image"
+            onClick={(e) => nextImage(e, true)}
+            hidden={!hovering}
+            className="z-10"
+          >
             {arrow('')}
           </button>
         </div>
         <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(images.length)].map((_, i) => (
-            <button key={i} onClick={(e) => setImage(i, e)}>
+            <button key={i} onClick={(e) => specificImage(i, e)}>
               {i == currentSlideIndex && (
                 <motion.div
                   layout

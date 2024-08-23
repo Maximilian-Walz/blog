@@ -1,3 +1,4 @@
+import PageViewTracker from '@/components/PageViewTracker'
 import { formatTag } from '@/components/Tag'
 import TagRecords from '@/components/TagRecords'
 import siteMetadata from '@/data/siteMetadata'
@@ -41,6 +42,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   )
   return (
     <div>
+      <PageViewTracker title={title} />
       <h1 className="pt-5 text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
         {title}
       </h1>

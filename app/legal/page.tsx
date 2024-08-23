@@ -1,11 +1,16 @@
+import PageViewTracker from '@/components/PageViewTracker'
 import siteMetadata from '@/data/siteMetadata'
+import { genPageMetadata } from 'app/seo'
 import { formatDate } from 'pliny/utils/formatDate'
 
+export const metadata = genPageMetadata({ title: 'Legal' })
+
 export default function Legal() {
-  const updated = '2024-08-22'
+  const updated = '2024-08-23'
 
   return (
     <div className="ml-auto w-4/5">
+      <PageViewTracker title="Legal" />
       <h1 className="mb-1 text-2xl font-extrabold sm:text-3xl md:text-4xl">Privacy Policy</h1>
       <div className="flex gap-2 text-base font-medium leading-6 text-gray-500">
         <dt>Last Updated on:</dt>
@@ -52,8 +57,8 @@ export default function Legal() {
       <p className="prose prose-invert">
         I use <a href="https://matomo.org/matomo-on-premise/">Matomo On-Premise</a>, a self-hosted
         analytics tool, to understand how visitors interact with my site. Your IP address is
-        anonymized, and all data is stored securely on my servers. If you prefer not to be tracked,
-        enable the "Do Not Track" feature in your browser.
+        anonymized, and all data is stored securely on servers, hosted in Germany. If you prefer not
+        to be tracked, enable the "Do Not Track" feature in your browser.
       </p>
 
       <h2 className="mb-1 mt-6 text-xl font-extrabold sm:text-2xl md:text-3xl">4. Cookies</h2>

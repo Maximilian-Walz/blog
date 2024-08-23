@@ -1,9 +1,11 @@
 'use client'
 
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
 import { useEffect, useState } from 'react'
 
 export function ScrollTop() {
   const [show, setShow] = useState(false)
+  const { trackEvent } = useMatomo()
 
   useEffect(() => {
     const handleWindowScroll = () => {
@@ -17,6 +19,7 @@ export function ScrollTop() {
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0 })
+    trackEvent({ category: 'General', action: 'scroll top click' })
   }
 
   return (
@@ -26,7 +29,7 @@ export function ScrollTop() {
       <button
         aria-label="Scroll To Top"
         onClick={handleScrollTop}
-        className="rounded-full bg-primary-700 text-primary-400 transition-all  hover:text-primary-400"
+        className="rounded-full bg-primary-700 p-2 text-primary-400  transition-all hover:text-primary-400"
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path

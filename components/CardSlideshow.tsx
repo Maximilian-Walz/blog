@@ -1,3 +1,4 @@
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useHover, useInterval, useMediaQuery } from 'usehooks-ts'
@@ -23,6 +24,7 @@ const arrow = (transform) => (
 )
 
 export default function CardSlideshow({ cards, id, changeInterval = null }: Props) {
+  const { trackEvent } = useMatomo()
   const isSmallDevice = useMediaQuery('only screen and (max-width : 640px)')
   const isMediumDevice = useMediaQuery('only screen and (max-width : 1280px)')
   const [slidesAmount, setSlidesAmount] = useState(0)
@@ -37,7 +39,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
     setCurrentSlideIndex(0)
   }, [isSmallDevice, isMediumDevice, cards.length])
 
-  const setImage = (slideIndex: number, e?: React.MouseEvent<HTMLElement>) => {
+  const setCard = (slideIndex: number, e?: React.MouseEvent<HTMLElement>) => {
     e?.stopPropagation()
     e?.preventDefault()
     setLastChange(Date.now())
@@ -55,17 +57,24 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
     setCurrentSlideIndex(slideIndex)
   }
 
-  const prevCard = (e: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(Math.ceil(currentSlideIndex - 1), slidesAmount), e)
+  const prevCard = (e?: React.MouseEvent<HTMLElement>) => {
+    setCard(mod(Math.ceil(currentSlideIndex - 1), slidesAmount), e)
+    trackEvent({ category: 'Card slideshow', action: 'prev card click' })
   }
 
-  const nextCard = (e?: React.MouseEvent<HTMLElement>) => {
-    setImage(mod(Math.ceil(currentSlideIndex + 1), slidesAmount), e)
+  const nextCard = (e?: React.MouseEvent<HTMLElement>, track?: boolean) => {
+    setCard(mod(Math.ceil(currentSlideIndex + 1), slidesAmount), e)
+    if (track) trackEvent({ category: 'Card slideshow', action: 'next card click' })
+  }
+
+  const specificCard = (i: number, e?: React.MouseEvent<HTMLElement>) => {
+    setCard(i, e)
+    trackEvent({ category: 'Card slideshow', action: 'indicator click' })
   }
 
   useInterval(() => {
     if (changeInterval && Date.now() - lastChange > changeInterval && !hovering) {
-      nextCard()
+      nextCard(undefined, false)
     }
   }, changeInterval)
 
@@ -75,7 +84,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
         <div className="absolute -inset-10 flex justify-between self-center">
           <button
             aria-label="Previous image"
-            onClick={prevCard}
+            onClick={(e) => prevCard(e)}
             hidden={!hovering || slidesAmount <= 1}
             className="z-10"
           >
@@ -83,7 +92,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
           </button>
           <button
             aria-label="Next image"
-            onClick={nextCard}
+            onClick={(e) => nextCard(e, true)}
             hidden={!hovering || slidesAmount <= 1}
             className="z-10"
           >
@@ -92,7 +101,7 @@ export default function CardSlideshow({ cards, id, changeInterval = null }: Prop
         </div>
         <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse">
           {[...Array(slidesAmount)].map((_, i) => (
-            <button key={i} onClick={(e) => setImage(i, e)} hidden={slidesAmount <= 1}>
+            <button key={i} onClick={(e) => specificCard(i, e)} hidden={slidesAmount <= 1}>
               {i == Math.ceil(currentSlideIndex) && (
                 <motion.div
                   layoutId={`indicator-${id}`}

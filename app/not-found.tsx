@@ -1,6 +1,16 @@
+'use client'
+
 import Link from '@/components/Link'
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
+import { useEffect } from 'react'
 
 export default function NotFound() {
+  const { trackPageView } = useMatomo()
+
+  useEffect(() => {
+    trackPageView({ documentTitle: `404 [${location.pathname}]` })
+  }, [trackPageView])
+
   return (
     <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
       <div className="space-x-2 pb-8 pt-6 md:space-y-5">

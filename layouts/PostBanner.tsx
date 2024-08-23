@@ -7,6 +7,7 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
 import type { Blog } from 'contentlayer/generated'
 import { motion } from 'framer-motion'
 import Bleed from 'pliny/ui/Bleed'
@@ -22,6 +23,8 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
+  const { trackEvent } = useMatomo()
+
   const { slug, title, images, date, tags } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
@@ -95,6 +98,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                     href={`/${prev.path}`}
                     className="text-primary-500 hover:text-primary-400"
                     aria-label={`Previous post: ${prev.title}`}
+                    onClick={() => trackEvent({ category: 'Post interaction', action: 'prev' })}
                   >
                     &larr; {prev.title}
                   </Link>
@@ -106,6 +110,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                     href={`/${next.path}`}
                     className="text-primary-500 hover:text-primary-400"
                     aria-label={`Next post: ${next.title}`}
+                    onClick={() => trackEvent({ category: 'Post interaction', action: 'next' })}
                   >
                     {next.title} &rarr;
                   </Link>
