@@ -58,6 +58,9 @@ export default function ImageSlideshow({
   }
 
   const handleSwiping = (eventData: SwipeEventData) => {
+    // Check if the vertical swipe is more significant than the horizontal swipe
+    if (Math.abs(eventData.deltaY) > Math.abs(eventData.deltaX)) return
+
     const width = (eventData.event.currentTarget as HTMLElement).clientWidth
     const percentage = eventData.deltaX / width
     setLastChange(Date.now())
@@ -67,8 +70,8 @@ export default function ImageSlideshow({
   const handleSwiped = (eventData: SwipeEventData) => {
     const width = (eventData.event.target as HTMLElement).clientWidth
     const percentage = eventData.deltaX / width
-    if (Math.abs(percentage) > 0.5) {
-      const currentImageIndex = currentSlideIndex - Math.round(percentage)
+    if (Math.abs(percentage) > 0.25) {
+      const currentImageIndex = currentSlideIndex - Math.sign(percentage)
       setImage(Math.max(Math.min(currentImageIndex, images.length - 1), 0))
     } else {
       setCurrentViewFactor(currentSlideIndex)
@@ -97,7 +100,7 @@ export default function ImageSlideshow({
   }, changeInterval)
 
   return (
-    <div {...handlers} className="touch-none">
+    <div {...handlers} className="touch-none touch-pan-y">
       <div ref={hoverRef} className="relative overflow-hidden">
         <div className="absolute inset-0 flex justify-between self-center">
           <button
