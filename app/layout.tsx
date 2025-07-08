@@ -58,14 +58,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${space_grotesk.variable} h-32 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full hover:scrollbar-thumb-primary-500`}
       suppressHydrationWarning
     >
-      <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
-      <link rel="manifest" href="/static/favicons/site.webmanifest" />
-      <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="darkreader-lock" />
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+      <head>
+        <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
+        <link rel="manifest" href="/static/favicons/site.webmanifest" />
+        <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="darkreader-lock" />
+        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <script>let FF_FOUC_FIX;</script>
+      </head>
       <body className=" bg-gray-950 text-white antialiased">
         <App>{children}</App>
       </body>
